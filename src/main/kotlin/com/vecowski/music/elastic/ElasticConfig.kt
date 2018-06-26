@@ -1,4 +1,4 @@
-package com.vecowski.lyrics
+package com.vecowski.music.elastic
 
 import org.elasticsearch.client.transport.TransportClient
 import org.elasticsearch.common.settings.Settings

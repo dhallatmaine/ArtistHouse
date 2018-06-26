@@ -1,4 +1,4 @@
-package com.vecowski.lyrics
+package com.vecowski.music.lyrics
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 

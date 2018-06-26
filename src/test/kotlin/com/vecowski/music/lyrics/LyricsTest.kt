@@ -1,5 +1,6 @@
-package com.vecowski.lyrics
+package com.vecowski.music.lyrics
 
+import com.vecowski.music.LyricsApplication
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
