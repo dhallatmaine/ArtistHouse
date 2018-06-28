@@ -1,0 +1,79 @@
+<html>
+<head>
+    <script type="text/javascript" src="vis.min.js"></script>
+    <link href="vis.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    var xhttp = new XMLHttpRequest();
+    var response;
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(xhttp.response);
+            var nodeData = [];
+            var edgeData = [];
+            var nodeSet = [];
+            for (var key in response) {
+                if (response.hasOwnProperty(key)) {
+                    var val = response[key];
+                    nodeData.push({id: key, label: key, group: 'artist'});
+                    for (var i = 0; i < val.length; i++) {
+                        if (nodeSet.indexOf(val[i]) === -1) {
+                            nodeSet.push(val[i]);
+                            nodeData.push({id: val[i], label: val[i], group: 'band'});
+                        }
+                        edgeData.push({from: key, to: val[i]})
+                    }
+                }
+            }
+            // create an array with nodes
+            var nodes = new vis.DataSet(nodeData);
+
+            // create an array with edges
+            var edges = new vis.DataSet(edgeData);
+
+            // create a network
+            var container = document.getElementById('mynetwork');
+
+            // provide the data in the vis format
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {
+                width: '100%',
+                height: '100%',
+                groups: {
+                    artist: {
+                        shape: 'icon',
+                        icon: {
+                            face: 'FontAwesome',
+                            code: '\uf007',
+                            size: 50,
+                            color: 'orange'
+                        }
+                    },
+                    band: {
+                        shape: 'icon',
+                        icon: {
+                            face: 'FontAwesome',
+                            code: '\uf001',
+                            size: 50,
+                            color: 'blue'
+                        }
+                    }
+                }
+            };
+
+            // initialize your network!
+            new vis.Network(container, data, options);
+        }
+    };
+    xhttp.open("GET", "http://localhost:8080/artists");
+    xhttp.send();
+</script>
+</body>
+</html>

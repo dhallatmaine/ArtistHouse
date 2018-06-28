@@ -1,5 +1,11 @@
 package com.vecowski.music.scraper
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
+import org.springframework.context.annotation.Scope
+import org.springframework.stereotype.Component
+
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 class MusciansAndBands {
 
     private val members = HashMap<String, HashSet<String>>()
@@ -19,6 +25,10 @@ class MusciansAndBands {
 
     fun size(): Int {
         return members.size
+    }
+
+    fun get(): HashMap<String, HashSet<String>> {
+        return members;
     }
 
 }

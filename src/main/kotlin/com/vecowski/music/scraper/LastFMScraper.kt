@@ -2,8 +2,14 @@ package com.vecowski.music.scraper
 
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
-class LastFMScraper(val musciansAndBands: MusciansAndBands) : Scraper {
+@Component
+class LastFMScraper : Scraper {
+
+    @Autowired
+    val musciansAndBands: MusciansAndBands? = null
 
     override fun run(bands: List<BandLink>) {
         for (band in bands) {
@@ -22,7 +28,7 @@ class LastFMScraper(val musciansAndBands: MusciansAndBands) : Scraper {
     fun addMembers(ulMembers: Elements, band: String) {
         for (member in ulMembers) {
             val name = member.childNode(0).toString()
-            musciansAndBands.add(name, band)
+            musciansAndBands!!.add(name, band)
         }
     }
 
