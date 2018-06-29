@@ -10,6 +10,9 @@ class ScraperController {
     @Autowired
     val lastFMScraper: LastFMScraper? = null
 
+    @Autowired
+    val AZLyricsBandsFetcher: AZLyricsBandsFetcher? = null
+
     @GetMapping("/scrape", produces = arrayOf("application/json"))
     fun run() {
         val bands = ArrayList<BandLink>()
@@ -18,6 +21,11 @@ class ScraperController {
         bands.add(BandLink("Bosnian Rainbows", "https://www.last.fm/music/Bosnian+Rainbows/+wiki"))
         bands.add(BandLink("At the Drive-In", "https://www.last.fm/music/At+the+Drive-In/+wiki"))
         lastFMScraper!!.run(bands)
+    }
+
+    @GetMapping("/bands")
+    fun bands() {
+        AZLyricsBandsFetcher!!.run()
     }
 
 }

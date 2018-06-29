@@ -6,14 +6,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication(scanBasePackages = arrayOf("com.vecowski.music"))
-class LyricsApplication: SpringBootServletInitializer() {
+class ArtistHouseApplication: SpringBootServletInitializer() {
 
     override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder {
-        return application.sources(LyricsApplication::class.java)
+        return application.sources(ArtistHouseApplication::class.java)
     }
 
 }
 
 fun main(args: Array<String>) {
-    SpringApplication.run(LyricsApplication::class.java, *args)
+    SpringApplication.run(ArtistHouseApplication::class.java, *args)
 }
