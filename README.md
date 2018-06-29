@@ -1,5 +1,5 @@
-# Lyrics site
+# ArtistHouse
 
-powered by Springboot 2, Java 10, Kotlin, and ElasticSearch
-
-`docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "node.name=data-node-1" -e "cluster.name=lyrics-cluster" docker.elastic.co/elasticsearch/elasticsearch:6.3.0`
+ArtistHouse is a project that attempts to collect information about artists and visualize the bands they have been in. 
+This project is intended to provide a visualization of similarities between bands and allow you to explore other bands
+you may like, but have not heard of.
