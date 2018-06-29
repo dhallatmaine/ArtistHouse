@@ -1,19 +1,18 @@
-package com.vecowski.music.scraper
+package com.vecowski.music.scraper.lastfm
 
+import com.vecowski.music.scraper.MusciansAndBands
+import com.vecowski.music.scraper.Scraper
+import de.umass.lastfm.Artist
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class LastFMScraper : Scraper {
+class LastFMScraper(private val musciansAndBands: MusciansAndBands) : Scraper {
 
-    @Autowired
-    val musciansAndBands: MusciansAndBands? = null
-
-    override fun run(bands: List<BandLink>) {
+    override fun run(bands: List<Artist>) {
         for (band in bands) {
-            scrape(band.name, band.link)
+            scrape(band.name, band.url + "/+wiki")
         }
     }
 

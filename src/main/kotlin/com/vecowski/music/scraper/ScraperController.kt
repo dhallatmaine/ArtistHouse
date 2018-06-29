@@ -1,31 +1,31 @@
 package com.vecowski.music.scraper
 
-import org.springframework.beans.factory.annotation.Autowired
+import com.vecowski.music.scraper.lastfm.LastFMAPI
+import com.vecowski.music.scraper.lastfm.LastFMScraper
+import de.umass.lastfm.Artist
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class ScraperController {
-
-    @Autowired
-    val lastFMScraper: LastFMScraper? = null
-
-    @Autowired
-    val AZLyricsBandsFetcher: AZLyricsBandsFetcher? = null
+class ScraperController(
+        private val lastFMScraper: LastFMScraper,
+        private val bandLoader: BandLoader,
+        private val lastFMAPI: LastFMAPI) {
 
     @GetMapping("/scrape", produces = arrayOf("application/json"))
     fun run() {
-        val bands = ArrayList<BandLink>()
-        bands.add(BandLink("The Mars Volta", "https://www.last.fm/music/The+Mars+Volta/+wiki"))
-        bands.add(BandLink("Antemasque", "https://www.last.fm/music/Antemasque/+wiki"))
-        bands.add(BandLink("Bosnian Rainbows", "https://www.last.fm/music/Bosnian+Rainbows/+wiki"))
-        bands.add(BandLink("At the Drive-In", "https://www.last.fm/music/At+the+Drive-In/+wiki"))
-        lastFMScraper!!.run(bands)
-    }
+        val bandList = bandLoader.loadBands()
 
-    @GetMapping("/bands")
-    fun bands() {
-        AZLyricsBandsFetcher!!.run()
+        val artists = arrayListOf<Artist>()
+
+        for (band in bandList) {
+            val artist = lastFMAPI.search(band)
+            if (artist != null) {
+                artists.add(artist)
+            }
+        }
+
+        lastFMScraper.run(artists)
     }
 
 }

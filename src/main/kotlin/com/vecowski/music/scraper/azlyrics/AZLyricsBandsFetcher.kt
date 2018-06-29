@@ -1,4 +1,4 @@
-package com.vecowski.music.scraper
+package com.vecowski.music.scraper.azlyrics
 
 import org.jsoup.Jsoup
 import org.springframework.stereotype.Component
