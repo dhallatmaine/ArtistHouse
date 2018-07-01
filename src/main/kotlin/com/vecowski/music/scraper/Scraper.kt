@@ -4,6 +4,6 @@ import de.umass.lastfm.Artist
 
 interface Scraper {
 
-    fun run(bands: List<Artist>)
+    fun run(band: Artist)
 
 }

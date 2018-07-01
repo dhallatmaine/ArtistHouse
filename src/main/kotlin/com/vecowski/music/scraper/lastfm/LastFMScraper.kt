@@ -10,10 +10,8 @@ import org.springframework.stereotype.Component
 @Component
 class LastFMScraper(private val musciansAndBands: MusciansAndBands) : Scraper {
 
-    override fun run(bands: List<Artist>) {
-        for (band in bands) {
-            scrape(band.name, band.url + "/+wiki")
-        }
+    override fun run(band: Artist) {
+        scrape(band.name, band.url + "/+wiki")
     }
 
     fun scrape(band: String, link: String) {

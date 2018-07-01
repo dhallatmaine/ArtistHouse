@@ -16,16 +16,12 @@ class ScraperController(
     fun run() {
         val bandList = bandLoader.loadBands()
 
-        val artists = arrayListOf<Artist>()
-
         for (band in bandList) {
             val artist = lastFMAPI.search(band)
             if (artist != null) {
-                artists.add(artist)
+                lastFMScraper.run(artist)
             }
         }
-
-        lastFMScraper.run(artists)
     }
 
 }

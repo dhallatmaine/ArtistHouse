@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service
 class LastFMAPI(@Value("\${lastfm.api.key}") private val key: String) {
 
     fun search(term: String): Artist? {
-        val artists = Artist.search(term, key)
-        return if (artists.isEmpty()) null else artists.first()
+        try {
+            val artists = Artist.search(term, key)
+            return if (artists == null || artists.isEmpty()) null else artists.first()
+        } catch (e: Exception) { }
+        return null
     }
 
 }
