@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController
 class ScraperController(
         private val lastFMScraper: LastFMScraper,
         private val bandLoader: BandLoader,
-        private val lastFMAPI: LastFMAPI) {
+        private val lastFMAPI: LastFMAPI,
+        private val musciansAndBands: MusciansAndBands) {
 
     @GetMapping("/scrape", produces = arrayOf("application/json"))
     fun run() {
@@ -21,6 +22,12 @@ class ScraperController(
             if (artist != null) {
                 lastFMScraper.run(artist)
             }
+        }
+
+        // only display artists in more than 1 band
+        val mutableIterator = musciansAndBands.get().keys.iterator()
+        for (key in mutableIterator) {
+            if (musciansAndBands.get().get(key)!!.size == 1) musciansAndBands.get().remove(key)
         }
     }
 
