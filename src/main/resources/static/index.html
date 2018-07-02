@@ -71,6 +71,17 @@
                             color: 'blue'
                         }
                     }
+                },
+                physics: {
+                    stabilization: false,
+                    barnesHut: {
+                        gravitationalConstant: -30000,
+                        avoidOverlap: 1
+                    }
+                },
+                interaction: {
+                    tooltipDelay: 200,
+                    hideEdgesOnDrag: true
                 }
             };
 

@@ -12,11 +12,10 @@ class MusciansAndBands {
     private val members = ConcurrentHashMap<String, HashSet<String>>()
 
     fun add(name: String, band: String) {
-        if (members.get(name) == null) {
-            members.put(name, hashSetOf(band))
+        if (members[name] == null) {
+            members[name] = hashSetOf(band)
         } else {
-            val bands = members.get(name)
-            bands!!.add(band)
+            members[name]!!.add(band)
         }
     }
 
@@ -29,7 +28,7 @@ class MusciansAndBands {
     }
 
     fun get(): ConcurrentHashMap<String, HashSet<String>> {
-        return members;
+        return members
     }
 
 }
