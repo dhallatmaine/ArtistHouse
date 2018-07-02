@@ -6,12 +6,15 @@ import de.umass.lastfm.Artist
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import org.springframework.stereotype.Component
+import java.lang.Exception
 
 @Component
 class LastFMScraper(private val musciansAndBands: MusciansAndBands) : Scraper {
 
     override fun run(band: Artist) {
-        scrape(band.name, band.url + "/+wiki")
+        try {
+            scrape(band.name, band.url + "/+wiki")
+        } catch (e: Exception) { }
     }
 
     fun scrape(band: String, link: String) {
