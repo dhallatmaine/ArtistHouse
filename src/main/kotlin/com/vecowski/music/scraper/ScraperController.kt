@@ -11,7 +11,7 @@ class ScraperController(
         private val lastFMScraper: LastFMScraper,
         private val bandLoader: BandLoader,
         private val lastFMAPI: LastFMAPI,
-        private val musciansAndBands: MusciansAndBands) {
+        private val musiciansAndBands: MusiciansAndBands) {
 
     @GetMapping("/scrape", produces = arrayOf("application/json"))
     fun run() {
@@ -25,9 +25,9 @@ class ScraperController(
         }
 
         // only display artists in more than 1 band
-        val mutableIterator = musciansAndBands.get().keys.iterator()
+        val mutableIterator = musiciansAndBands.get().keys.iterator()
         for (key in mutableIterator) {
-            if (musciansAndBands.get().get(key)!!.size == 1) musciansAndBands.get().remove(key)
+            if (musiciansAndBands.get().get(key)!!.size == 1) musiciansAndBands.get().remove(key)
         }
     }
 

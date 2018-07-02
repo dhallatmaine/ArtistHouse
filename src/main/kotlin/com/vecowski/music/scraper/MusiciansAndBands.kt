@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-class MusciansAndBands {
+class MusiciansAndBands {
 
     private val members = ConcurrentHashMap<String, HashSet<String>>()
 
