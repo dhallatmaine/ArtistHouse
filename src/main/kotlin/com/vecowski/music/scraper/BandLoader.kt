@@ -8,7 +8,7 @@ class BandLoader {
 
     fun loadBands(): List<String> {
         val bands = arrayListOf<String>()
-        ClassPathResource("bands_medium.txt").inputStream.bufferedReader().forEachLine {
+        ClassPathResource("bands.txt").inputStream.bufferedReader().forEachLine {
             bands.add(it)
         }
         return bands
