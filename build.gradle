@@ -47,5 +47,6 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-reflect")
     compile("org.jsoup:jsoup:1.11.3")
     compile("de.u-mass:lastfm-java:0.1.2")
+    compile("com.google.code.gson:gson:2.8.5")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

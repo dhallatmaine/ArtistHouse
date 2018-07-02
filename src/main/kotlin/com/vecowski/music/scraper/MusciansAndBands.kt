@@ -31,4 +31,8 @@ class MusciansAndBands {
         return members
     }
 
+    fun set(members: ConcurrentHashMap<String, HashSet<String>>) {
+        this.members.putAll(members)
+    }
+
 }
