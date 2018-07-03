@@ -5,9 +5,21 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
+<div>
+    <form name="searchForm" method="get" action="index.html">
+        <input type="text" name="search" value="all" />
+        &nbsp;&nbsp;
+        <input type="submit" value="search" />
+    </form>
+</div>
 <div id="mynetwork"></div>
 
 <script type="text/javascript">
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var term = url.searchParams.get("search");
+    if (term === null || term === "") term = "all";
+    document.forms["searchForm"]["search"].value = term;
     var xhttp = new XMLHttpRequest();
     var response;
     xhttp.onreadystatechange = function() {
@@ -89,7 +101,7 @@
             new vis.Network(container, data, options);
         }
     };
-    xhttp.open("GET", "/search?term=The Mars Volta");
+    xhttp.open("GET", "/search?term=" + term);
     xhttp.send();
 </script>
 </body>
