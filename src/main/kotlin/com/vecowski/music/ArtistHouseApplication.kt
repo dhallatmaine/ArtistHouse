@@ -7,8 +7,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.core.io.ClassPathResource
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.vecowski.music.scraper.MusiciansAndBands
-import java.util.concurrent.ConcurrentHashMap
+import com.vecowski.music.scraper.BandsToMusiciansMap
+import com.vecowski.music.scraper.MusiciansToBandsMap
 import org.springframework.context.ApplicationListener
 import org.springframework.context.event.ContextRefreshedEvent
 import org.springframework.stereotype.Component
@@ -24,13 +24,15 @@ class ArtistHouseApplication: SpringBootServletInitializer() {
 }
 
 @Component
-class ContextRefreshedListener(val musiciansAndBands: MusiciansAndBands) : ApplicationListener<ContextRefreshedEvent> {
+class ContextRefreshedListener(private val musiciansToBandsMap: MusiciansToBandsMap,
+                               private val bandsToMusiciansMap: BandsToMusiciansMap) : ApplicationListener<ContextRefreshedEvent> {
 
     override fun onApplicationEvent(contextRefreshedEvent: ContextRefreshedEvent) {
         val json = ClassPathResource("artists.json").inputStream.bufferedReader().readText()
-        val members: ConcurrentHashMap<String, HashSet<String>> = Gson().fromJson(json, object : TypeToken<ConcurrentHashMap<String, HashSet<String>>>() {}.type)
-        musiciansAndBands.clear()
-        musiciansAndBands.set(members)
+        val members: HashMap<String, HashSet<String>> = Gson().fromJson(json, object : TypeToken<HashMap<String, HashSet<String>>>() {}.type)
+        musiciansToBandsMap.clear()
+        musiciansToBandsMap.set(members)
+        bandsToMusiciansMap.set(members)
     }
 }
 

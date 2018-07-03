@@ -1,6 +1,6 @@
 package com.vecowski.music.scraper.lastfm
 
-import com.vecowski.music.scraper.MusiciansAndBands
+import com.vecowski.music.scraper.MusiciansToBandsMap
 import com.vecowski.music.scraper.Scraper
 import de.umass.lastfm.Artist
 import org.jsoup.Jsoup
@@ -9,12 +9,14 @@ import org.springframework.stereotype.Component
 import java.lang.Exception
 
 @Component
-class LastFMScraper(private val musiciansAndBands: MusiciansAndBands) : Scraper {
+class LastFMScraper(private val musiciansToBandsMap: MusiciansToBandsMap) : Scraper {
 
     override fun run(band: Artist) {
+        /*
         try {
             scrape(band.name, band.url + "/+wiki")
         } catch (e: Exception) { }
+        */
     }
 
     fun scrape(band: String, link: String) {
@@ -28,7 +30,7 @@ class LastFMScraper(private val musiciansAndBands: MusiciansAndBands) : Scraper 
     fun addMembers(ulMembers: Elements, band: String) {
         for (member in ulMembers) {
             val name = member.childNode(0).toString()
-            musiciansAndBands!!.add(name, band)
+            musiciansToBandsMap!!.add(name, band)
         }
     }
 

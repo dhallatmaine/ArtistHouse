@@ -3,9 +3,9 @@ package com.vecowski.music.scraper
 import org.junit.Before
 import org.junit.Test
 
-class MusiciansAndBandsTest {
+class MusiciansToBandsMapTest {
 
-    private val musciansAndBands = MusiciansAndBands()
+    private val musciansAndBands = MusiciansToBandsMap()
 
     @Before
     fun setup() {
